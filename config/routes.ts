@@ -68,8 +68,14 @@
       {
         name: '可编辑表格',
         icon: 'table',
-        path: '/editProTable',
+        path: '/table/editProTable',
         component: './Table/editProTable',
+      },
+      {
+        name: 'formitem验证表格',
+        icon: 'table',
+        path: '/table/validateTable',
+        component: './Table/validateTable',
       },
     ],
   },
@@ -79,13 +85,19 @@
     path: '/product/list',
     component: './product/list',
   },
-  {
-    name: 'Form表单',
-    icon: 'FileAddOutlined',
-    path: '/product/add',
-    component: './product/addProduct',
-    hideInMenu: true
-  },
+  // {
+  //   name: 'Form表单',
+  //   icon: 'FileAddOutlined',
+  //   path: '/form',
+  //   routes: [
+  //     {
+  //       name: 'debonce',
+  //       icon: 'table',
+  //       path: '/form/debonce',
+  //       component: './Form/debounceSelect',
+  //     },
+  //   ],
+  // },
   {
     path: '/',
     redirect: '/welcome',
