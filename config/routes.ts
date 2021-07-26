@@ -27,6 +27,7 @@
     icon: 'crown',
     access: 'canAdmin',
     component: './Admin',
+    hideInMenu: true,
     routes: [
       {
         path: '/admin/sub-page',
