@@ -49,16 +49,29 @@
     component: './project',
   },
   {
-    name: '可编辑表格',
+    path: '/table',
+    name: 'table',
     icon: 'table',
-    path: '/editProTable',
-    component: './product/editProTable',
-  },
-  {
-    name: '表格合并',
-    icon: 'table',
-    path: '/spanTable',
-    component: './spanTable',
+    routes: [
+      {
+        name: '表格合并',
+        icon: 'table',
+        path: '/table/spanTable',
+        component: './Table/spanTable',
+      },
+      {
+        name: 'tree表格',
+        icon: 'table',
+        path: '/table/treeTable',
+        component: './Table/treeTable',
+      },
+      {
+        name: '可编辑表格',
+        icon: 'table',
+        path: '/editProTable',
+        component: './Table/editProTable',
+      },
+    ],
   },
   {
     name: '产品列表',
