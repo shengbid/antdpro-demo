@@ -1,5 +1,5 @@
 import { useModel } from 'umi';
-import { Descriptions, Button } from 'antd';
+import { Descriptions } from 'antd';
 
 export default () => {
   const { count } = useModel('product', model => (
