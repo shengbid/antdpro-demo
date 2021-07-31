@@ -44,10 +44,29 @@
     component: './TableList',
   },
   {
-    name: '嵌套组件',
-    icon: 'table',
-    path: '/project',
-    component: './project',
+    name: '全局数据流',
+    icon: 'profile',
+    path: '/data',
+    routes: [
+      {
+        name: 'dva数据',
+        icon: 'table',
+        path: '/data/dva',
+        component: './dataManage/project',
+      },
+      {
+        name: 'initial数据',
+        icon: 'table',
+        path: '/data/initialstate',
+        component: './dataManage/initialstate',
+      },
+      {
+        name: 'useModel数据',
+        icon: 'table',
+        path: '/data/useModel',
+        component: './dataManage/useModel',
+      },
+    ]
   },
   {
     path: '/table',
@@ -88,7 +107,7 @@
   },
   // {
   //   name: 'Form表单',
-  //   icon: 'FileAddOutlined',
+  //   icon: 'form',
   //   path: '/form',
   //   routes: [
   //     {
