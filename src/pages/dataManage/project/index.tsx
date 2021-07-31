@@ -1,26 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Project2 from './components/seconed'
 import { connect } from 'dva'
+import { Descriptions } from 'antd'
 
 const Project: React.Fc = (props) => {
-  const [name, setName] = useState('小李')
-  console.log(props.update)
+  const { useInfo } = props
 
-  return <div>
-    项目顶层组件
+  return <div style={{padding: '20px', background: '#fff'}}> 
     <div>
-      姓名: {name}
+      <h2>嵌套组件</h2>
+    <Descriptions title="项目顶层组件">
+      <Descriptions.Item label="姓名">{useInfo.userName}</Descriptions.Item>
+      <Descriptions.Item label="年龄">{useInfo.age}</Descriptions.Item>
+    </Descriptions>
     </div>
-    <div>
-      dva姓名: {props.update}
-    </div>
-    <Project2 onSuccess={(name) => {
-      setName(name)
-      console.log(999)
-    }}></Project2>
+    <Project2 />
   </div>
 }
 
-export default connect(({ project }) => ({
-  update: project.update,
+export default connect(({ user }) => ({
+  useInfo: user.useInfo,
 }))(Project)

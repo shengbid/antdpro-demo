@@ -1,14 +1,21 @@
 import React from 'react'
 import Project4 from './four'
+import { Descriptions } from 'antd'
+import { connect } from 'dva'
 
-const Project3: React.Fc = (props: {onSuccess: (name: string) => void}) => {
+const Project3: React.Fc = (props:any) => {
+  const { useInfo } = props
 
-  return <div>
-    项目第三层组件
-    <Project4 onSuccess={(name: string)=> {
-      props.onSuccess(name)
-    }}></Project4>
+  return <div style={{padding: '20px'}}>
+    
+    <Descriptions title="项目第三层组件">
+      <Descriptions.Item label="姓名">{useInfo.userName}</Descriptions.Item>
+      <Descriptions.Item label="年龄">{useInfo.age}</Descriptions.Item>
+    </Descriptions>
+    <Project4 />
   </div>
 }
 
-export default Project3
+export default connect(({ user }) => ({
+  useInfo: user.useInfo,
+}))(Project3)
