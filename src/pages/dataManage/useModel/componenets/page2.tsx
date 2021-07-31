@@ -18,11 +18,11 @@ export default () => {
       <Descriptions.Item label="数量">{count}</Descriptions.Item>
     </Descriptions>
     <h2>修改数据</h2>
-    <Button type="primary" onClick={addCount}>
-      数量+1
+    <Button type="primary" onClick={() => {addCount(2)}} style={{marginRight: '10px'}}>
+      数量+2
     </Button>
-    <Button type="primary" onClick={substractCount}>
-      数量-1
+    <Button type="primary" onClick={() => {substractCount(2)}}>
+      数量-2
     </Button>
   </>
 };
