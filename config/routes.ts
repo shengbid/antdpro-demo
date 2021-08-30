@@ -89,13 +89,30 @@
         name: '可编辑表格',
         icon: 'table',
         path: '/table/editProTable',
-        component: './Table/editProTable',
-      },
-      {
-        name: 'formitem验证表格',
-        icon: 'table',
-        path: '/table/validateTable',
-        component: './Table/validateTable',
+        routes: [
+          {
+            path: '/table/editProTable',
+            redirect: '/table/editProTable/data'
+          },
+          {
+            name: '可编辑表格',
+            icon: 'table',
+            path: '/table/editProTable/data',
+            component: './editTable/editProTable',
+          },
+          {
+            name: 'formitem验证表格',
+            icon: 'table',
+            path: '/table/editProTable/validate',
+            component: './editTable/validateTable',
+          },
+          {
+            name: '自定义表格',
+            icon: 'table',
+            path: '/table/editProTable/custom',
+            component: './editTable/customTable',
+          },
+        ]
       },
     ],
   },
