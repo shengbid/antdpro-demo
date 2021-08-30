@@ -30,7 +30,6 @@ const defaultData: DataSourceType[] = [
   {
     id: 624691229,
     title: '活动名称二',
-    labels: [{ key: 'man', label: '西北汉子' }],
     state: 'closed',
     area: '',
     created_at: '2020-05-26T08:19:22Z',
