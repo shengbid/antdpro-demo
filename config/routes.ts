@@ -107,12 +107,18 @@
             component: './editTable/validateTable',
           },
           {
-            name: '自定义表格',
+            name: '自定义编辑表格',
             icon: 'table',
             path: '/table/editProTable/custom',
             component: './editTable/customTable',
-          },
+          }, 
         ]
+      },
+      {
+        name: 'select表格',
+        icon: 'table',
+        path: '/table/select',
+        component: './Table/selectTable',
       },
     ],
   },
