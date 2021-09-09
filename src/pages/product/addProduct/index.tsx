@@ -29,9 +29,9 @@ const formInput = (props: any) => {
   return (
     <div>
       <p>
-      <Button type="primary" onClick={()=>{
+      {/* <Button type="primary" onClick={()=>{
         history.goBack()
-      }}>返回 </Button>
+      }}>返回 </Button> */}
       </p>
       <Collapse defaultActiveKey={['1']}>
         <Panel header="公司信息" key="1">

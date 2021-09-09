@@ -37,12 +37,12 @@
       },
     ],
   },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     name: '全局数据流',
     icon: 'profile',
@@ -128,19 +128,23 @@
     path: '/product/list',
     component: './product/list',
   },
-  // {
-  //   name: 'Form表单',
-  //   icon: 'form',
-  //   path: '/form',
-  //   routes: [
-  //     {
-  //       name: 'debonce',
-  //       icon: 'table',
-  //       path: '/form/debonce',
-  //       component: './Form/debounceSelect',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'Form表单',
+    icon: 'form',
+    path: '/form',
+    routes: [
+      {
+        path: '/form',
+        redirect: '/form/add'
+      },
+      {
+        name: 'form',
+        icon: 'table',
+        path: '/form/add',
+        component: './product/addProduct',
+      },
+    ],
+  },
   {
     path: '/',
     redirect: '/welcome',
