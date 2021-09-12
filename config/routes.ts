@@ -138,10 +138,16 @@
         redirect: '/form/add'
       },
       {
-        name: 'form',
+        name: 'form表单',
         icon: 'table',
         path: '/form/add',
         component: './product/addProduct',
+      },
+      {
+        name: 'debonceselect',
+        icon: 'table',
+        path: '/form/debonceselect',
+        component: './form/debounce',
       },
     ],
   },
