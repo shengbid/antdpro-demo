@@ -28,6 +28,9 @@ export default defineConfig({
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
+  devServer: {
+    port: 8090
+  },
   dynamicImport: {
     loading: '@ant-design/pro-layout/es/PageLoading',
   },
