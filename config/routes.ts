@@ -15,12 +15,12 @@
       },
     ],
   },
-  // {
-  //   path: '/welcome',
-  //   name: 'welcome',
-  //   icon: 'smile',
-  //   component: './Welcome',
-  // },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    icon: 'smile',
+    component: './Welcome',
+  },
   {
     path: '/admin',
     name: 'admin',
@@ -37,12 +37,12 @@
       },
     ],
   },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     name: '全局数据流',
     icon: 'profile',
@@ -132,6 +132,19 @@
         icon: 'table',
         path: '/form/upload',
         component: './form/upload',
+      },
+    ]
+  },
+  {
+    path: '/editor',
+    name: '富文本编辑',
+    icon: 'BarsOutlined',
+    routes: [
+      {
+        name: '新增',
+        icon: 'table',
+        path: '/editor/add',
+        component: './editor/add',
       },
     ]
   },
