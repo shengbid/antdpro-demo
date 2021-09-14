@@ -123,6 +123,19 @@
     ],
   },
   {
+    path: '/form',
+    name: 'form表单',
+    icon: 'BarsOutlined',
+    routes: [
+      {
+        name: 'upload上传',
+        icon: 'table',
+        path: '/form/upload',
+        component: './form/upload',
+      },
+    ]
+  },
+  {
     name: '产品列表',
     icon: 'BarsOutlined',
     path: '/product/list',
