@@ -123,6 +123,32 @@
     ],
   },
   {
+    path: '/form',
+    name: 'form表单',
+    icon: 'BarsOutlined',
+    routes: [
+      {
+        name: 'upload上传',
+        icon: 'table',
+        path: '/form/upload',
+        component: './form/upload',
+      },
+    ]
+  },
+  {
+    path: '/editor',
+    name: '富文本编辑',
+    icon: 'BarsOutlined',
+    routes: [
+      {
+        name: '新增',
+        icon: 'table',
+        path: '/editor/add',
+        component: './editor/add',
+      },
+    ]
+  },
+  {
     name: '产品列表',
     icon: 'BarsOutlined',
     path: '/product/list',
