@@ -160,19 +160,29 @@
     path: '/product/list',
     component: './product/list',
   },
-  // {
-  //   name: 'Form表单',
-  //   icon: 'form',
-  //   path: '/form',
-  //   routes: [
-  //     {
-  //       name: 'debonce',
-  //       icon: 'table',
-  //       path: '/form/debonce',
-  //       component: './Form/debounceSelect',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'Form表单',
+    icon: 'form',
+    path: '/form',
+    routes: [
+      {
+        path: '/form',
+        redirect: '/form/add'
+      },
+      {
+        name: 'form表单',
+        icon: 'table',
+        path: '/form/add',
+        component: './product/addProduct',
+      },
+      {
+        name: 'debonceselect',
+        icon: 'table',
+        path: '/form/debonceselect',
+        component: './form/debounce',
+      },
+    ],
+  },
   {
     path: '/',
     redirect: '/welcome',

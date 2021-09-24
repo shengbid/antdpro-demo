@@ -190,7 +190,7 @@ export default () => {
           type="primary"
           onClick={()=>{
             history.push({
-              pathname: '/product/add',
+              pathname: '/form/add',
               query: {
                 name: '跳转的参数'
               }
