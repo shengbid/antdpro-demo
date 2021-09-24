@@ -146,6 +146,12 @@
         path: '/editor/add',
         component: './editor/add',
       },
+      {
+        name: '列表',
+        icon: 'table',
+        path: '/editor/list',
+        component: './editor/list',
+      },
     ]
   },
   {

@@ -4,6 +4,7 @@
 // API 唯一标识：
 import * as api from './api';
 import * as login from './login';
+export * from './article';
 export default {
   api,
   login,
