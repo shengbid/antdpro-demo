@@ -123,19 +123,6 @@
     ],
   },
   {
-    path: '/form',
-    name: 'form表单',
-    icon: 'BarsOutlined',
-    routes: [
-      {
-        name: 'upload上传',
-        icon: 'table',
-        path: '/form/upload',
-        component: './form/upload',
-      },
-    ]
-  },
-  {
     path: '/editor',
     name: '富文本编辑',
     icon: 'BarsOutlined',
@@ -181,6 +168,12 @@
         path: '/form/debonceselect',
         component: './form/debounce',
       },
+      {
+        name: 'upload上传',
+        icon: 'table',
+        path: '/form/upload',
+        component: './form/upload',
+      }
     ],
   },
   {
