@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button, Space, Form, message } from 'antd';
+import { Button, Space, Form } from 'antd';
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 type DataSourceType = {
@@ -170,20 +170,22 @@ export default () => {
             setDataSource(recordList);
           },
           onChange: setEditableRowKeys,
+          deleteText: <MinusCircleOutlined style={{fontSize: '16px'}} />,
           actionRender: (row, config, dom) => {
             // console.log(row, dataSource)
-            return <MinusCircleOutlined style={{fontSize: '16px'}}
-              onClick={() => {
-                if (dataSource.length < 2) {
-                  message.warning('至少保留一条数据')
-                  return
-                }
-                setDataSource(() => 
-                  dataSource.filter(item => item.id !== row.id)
-                )
-              }}
-            />
-            },
+            return [dom.delete]
+            // return <MinusCircleOutlined style={{fontSize: '16px'}}
+            //   onClick={() => {
+            //     if (dataSource.length < 2) {
+            //       message.warning('至少保留一条数据')
+            //       return
+            //     }
+            //     setDataSource(() => 
+            //       dataSource.filter(item => item.id !== row.id)
+            //     )
+            //   }}
+            // />
+          },
         }}
       />
 
