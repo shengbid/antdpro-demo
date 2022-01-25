@@ -67,7 +67,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
     filters: true,
     onFilter: true,
     valueType: 'select',
-    // initialValue: 'all',
+    initialValue: 'all',
     valueEnum: {
       all: { text: '全部', status: 'Default' },
       open: {
@@ -324,7 +324,15 @@ export default () => {
         //   persistenceType: 'localStorage',
         // }}
         rowKey="id"
-        search={{ ...searchOption }}
+        search={{
+          ...searchOption,
+          onCollapse: (collapsed: boolean) => {
+            setSearchOption({
+              ...searchOption,
+              collapsed,
+            });
+          },
+        }}
         formRef={formRef}
         form={{
           // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
