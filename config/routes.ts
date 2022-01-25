@@ -66,7 +66,7 @@
         path: '/data/useModel',
         component: './dataManage/useModel',
       },
-    ]
+    ],
   },
   {
     path: '/table',
@@ -74,10 +74,33 @@
     icon: 'table',
     routes: [
       {
-        name: '表格合并',
+        name: 'protable表格',
         icon: 'table',
-        path: '/table/spanTable',
-        component: './Table/spanTable',
+        path: '/table/proTable',
+        routes: [
+          {
+            path: '/table/proTable',
+            redirect: '/table/proTable/spanTable',
+          },
+          {
+            name: 'search搜索属性',
+            icon: 'table',
+            path: '/table/proTable/search',
+            component: './proTable/search',
+          },
+          {
+            name: '表格合并',
+            icon: 'table',
+            path: '/table/proTable/spanTable',
+            component: './Table/spanTable',
+          },
+          {
+            name: 'select表格',
+            icon: 'table',
+            path: '/table/proTable/select',
+            component: './Table/selectTable',
+          },
+        ],
       },
       {
         name: 'tree表格',
@@ -92,7 +115,7 @@
         routes: [
           {
             path: '/table/editProTable',
-            redirect: '/table/editProTable/data'
+            redirect: '/table/editProTable/data',
           },
           {
             name: '可编辑表格',
@@ -111,14 +134,8 @@
             icon: 'table',
             path: '/table/editProTable/custom',
             component: './editTable/customTable',
-          }, 
-        ]
-      },
-      {
-        name: 'select表格',
-        icon: 'table',
-        path: '/table/select',
-        component: './Table/selectTable',
+          },
+        ],
       },
     ],
   },
@@ -139,7 +156,7 @@
         path: '/editor/list',
         component: './editor/list',
       },
-    ]
+    ],
   },
   {
     name: '产品列表',
@@ -154,7 +171,7 @@
     routes: [
       {
         path: '/form',
-        redirect: '/form/add'
+        redirect: '/form/add',
       },
       {
         name: 'form表单',
@@ -173,7 +190,7 @@
         icon: 'table',
         path: '/form/upload',
         component: './form/upload',
-      }
+      },
     ],
   },
   {
