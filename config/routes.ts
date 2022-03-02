@@ -88,25 +88,38 @@
             path: '/table/proTable/search',
             component: './proTable/search',
           },
+        ],
+      },
+      {
+        name: '常用表格',
+        icon: 'table',
+        path: '/table/baseTable',
+        routes: [
           {
             name: '表格合并',
             icon: 'table',
-            path: '/table/proTable/spanTable',
+            path: '/table/baseTable/spanTable',
             component: './Table/spanTable',
           },
           {
             name: 'select表格',
             icon: 'table',
-            path: '/table/proTable/select',
+            path: '/table/baseTable/select',
             component: './Table/selectTable',
           },
+          {
+            name: 'select表格合并',
+            icon: 'table',
+            path: '/table/baseTable/selectspan',
+            component: './Table/selectSpanTable',
+          },
+          {
+            name: 'tree树形表格',
+            icon: 'table',
+            path: '/table/baseTable/treetable',
+            component: './Table/treeTable',
+          },
         ],
-      },
-      {
-        name: 'tree表格',
-        icon: 'table',
-        path: '/table/treeTable',
-        component: './Table/treeTable',
       },
       {
         name: '可编辑表格',
