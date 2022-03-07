@@ -91,6 +91,7 @@ export const getCityList = (name: string) => {
   });
 };
 
+const sencondeNams = ['北京市', '天津市', '上海市', '重庆市', '香港特别行政区', '澳门特别行政区'];
 // 获取区县数据
 export const getAreaList = (city: any) => {
   const list: any[] = [];
@@ -106,7 +107,11 @@ export const getAreaList = (city: any) => {
 
   return new Promise((resolve, reject) => {
     if (city) {
-      resolve(list);
+      if (sencondeNams.includes(city.province)) {
+        resolve([]);
+      } else {
+        resolve(list);
+      }
     } else {
       reject(new Error('名称不能为空'));
     }

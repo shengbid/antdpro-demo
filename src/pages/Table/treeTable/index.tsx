@@ -141,8 +141,8 @@ const TreeTable: React.FC = () => {
         request={getCitys}
         expandable={{
           expandedRowRender: cityRender,
-          // expandedRowKeys: provinceRowKeys,
-          // onExpandedRowsChange: provinceExpandedRowsChange
+          // expandedRowKeys: cityRowKeys,
+          // onExpandedRowsChange: cityExpandedRowsChange
         }}
         pagination={false}
         toolBarRender={false}
@@ -154,7 +154,7 @@ const TreeTable: React.FC = () => {
   return (
     <div>
       <h2>Table 树形数据的展示, children数据异步获取</h2>
-      <p>antd 的table和 ant-pro 的Protable都是一样的用法</p>
+      <p>点击展开按钮调接口获取数据, antd 的table和 ant-pro 的Protable都是一样的用法</p>
       <ProTable
         bordered
         columns={colums}
@@ -163,7 +163,7 @@ const TreeTable: React.FC = () => {
         dataSource={tableData}
         expandable={{
           expandedRowRender: provinceRender,
-          // expandedRowKeys: provinceRowKeys,
+          // expandedRowKeys: provinceRowKeys, // 如果需要筛选, 每次调用接口时将展开项收起,需要将expandedRowKeys属性设为可控,
           // onExpandedRowsChange: provinceExpandedRowsChange
         }}
         pagination={false}
