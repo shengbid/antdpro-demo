@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ProTable from '@ant-design/pro-table';
-import { getCityList, getAreaList } from '@/services/citylist';
+import { getCityList, getAreaList, getProvinces } from '@/services/citylist';
+import { isEmpty } from 'lodash';
 
 const TreeTable: React.FC = () => {
   const [tableData, setTableData] = useState<any[]>([]);
+  const [tableData2, setTableData2] = useState<any[]>([]);
 
   const colums: any[] = [
     {
@@ -151,10 +153,60 @@ const TreeTable: React.FC = () => {
     );
   };
 
+  // 获取树形数据
+  const getData2 = async () => {
+    const res: any = await getProvinces();
+
+    setTableData2(res);
+  };
+
+  // 点击展开
+  const areaExpandedRowsChange = async (expanded: boolean, record: any) => {
+    console.log(expanded, record);
+    if (expanded && record.children && isEmpty(record.children)) {
+      if (record.level === 1) {
+        const res = await getCityList(record.province, 1);
+        setTableData2(
+          tableData2.map((item: any) => {
+            if (item.id === record.id) {
+              return {
+                ...item,
+                children: res,
+              };
+            }
+            return item;
+          }),
+        );
+      } else if (record.level === 2) {
+        const res = await getAreaList(record);
+        setTableData2(
+          tableData2.map((item: any) => {
+            const obj = {
+              ...item,
+            };
+            if (item.id === record.parentId) {
+              item.children.forEach((ss: any) => {
+                if (ss.id === record.id) {
+                  ss.children = res;
+                }
+              });
+            }
+            return obj;
+          }),
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    getData2();
+  }, []);
+
   return (
     <div>
       <h2>Table 树形数据的展示, children数据异步获取</h2>
-      <p>点击展开按钮调接口获取数据, antd 的table和 ant-pro 的Protable都是一样的用法</p>
+      <p>antd 的table和 ant-pro 的Protable都是一样的用法</p>
+      <p>点击展开按钮调接口获取数据, 放到expandedRowRender中</p>
       <ProTable
         bordered
         columns={colums}
@@ -165,6 +217,20 @@ const TreeTable: React.FC = () => {
           expandedRowRender: provinceRender,
           // expandedRowKeys: provinceRowKeys, // 如果需要筛选, 每次调用接口时将展开项收起,需要将expandedRowKeys属性设为可控,
           // onExpandedRowsChange: provinceExpandedRowsChange
+        }}
+        pagination={false}
+        toolBarRender={false}
+      />
+      <div style={{ height: '20px' }} />
+      <p>点击展开按钮调接口获取数据, 修改table数据</p>
+      <ProTable
+        bordered
+        columns={colums}
+        rowKey="id"
+        search={false}
+        dataSource={tableData2}
+        expandable={{
+          onExpand: areaExpandedRowsChange,
         }}
         pagination={false}
         toolBarRender={false}
