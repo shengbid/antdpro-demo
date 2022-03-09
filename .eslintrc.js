@@ -6,6 +6,7 @@ module.exports = {
     REACT_APP_ENV: true,
   },
   rules: {
-    'no-console': 'off'
-  }
+    'no-console': 'off',
+    'no-param-reassign': 'off',
+  },
 };
