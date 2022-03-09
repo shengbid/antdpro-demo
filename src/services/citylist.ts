@@ -1,7 +1,7 @@
 const sencondeNams = ['北京市', '天津市', '上海市', '重庆市', '香港特别行政区', '澳门特别行政区'];
 
 // 异步获取城市数据
-export const getCityList = (name: string, level: number) => {
+export const getCityList = (name: string, level?: number) => {
   const cityList = {
     广东省: [
       {
