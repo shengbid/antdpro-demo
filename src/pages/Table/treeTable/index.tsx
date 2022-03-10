@@ -101,10 +101,10 @@ const TreeTable: React.FC = () => {
 
   // 市渲染
   const provinceRender = (record: any) => {
+    // 如果表格数据没变化,不会重新调接口,这里不需要再判断是否有值
     // 获取城市数据
     const getCitys = async () => {
       const res = await getCityList(record.province);
-
       return {
         data: res,
       };
