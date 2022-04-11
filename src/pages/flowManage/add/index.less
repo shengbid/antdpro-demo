@@ -1,0 +1,136 @@
+.dndflow {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+.react-flow__attribution {
+  display: none;
+}
+.dndflow aside {
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+  border-right: 1px solid #eee;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .dndnode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-bottom: 10px;
+  padding: 4px;
+  border: 1px solid #1a192b;
+  border-radius: 2px;
+  cursor: grab;
+}
+
+.dndflow .dndnode.input {
+  border-color: #0041d0;
+}
+
+.dndflow .dndnode.output {
+  border-color: #ff0072;
+}
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 250px;
+  }
+}
+
+// node class
+.my_handle {
+  z-index: 99;
+}
+.nodeContent {
+  position: relative;
+  color: #222;
+  font-size: 12px;
+  line-height: 10px;
+  // padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  // width: 110px;
+  // height: 30px;
+  border: 1px solid #1a192b;
+  border-radius: 3px;
+  &:hover {
+    .close {
+      display: block;
+    }
+  }
+  .nodelabel {
+    width: 110px;
+    height: 30px;
+    padding: 10px;
+  }
+  .close {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    display: none;
+    width: 12px;
+    height: 12px;
+    color: #fff;
+    background-color: #555;
+    border-radius: 50%;
+    .icon-close {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-weight: normal;
+      font-size: 8px;
+      line-height: 3px;
+    }
+  }
+}
+// nodeStyle
+.nodeStyle {
+  width: 110px;
+  height: 30px;
+  line-height: 10px;
+}
+// updatenode
+.updatenode__controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  padding: 16px;
+  font-size: 12px;
+  background-color: #fff;
+}
+
+.updatenode__controls label {
+  display: block;
+}
+
+.updatenode__bglabel {
+  margin-top: 10px;
+}
+
+.updatenode__checkboxwrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
