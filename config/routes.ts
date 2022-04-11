@@ -207,6 +207,23 @@
     ],
   },
   {
+    name: '流程管理',
+    icon: 'RetweetOutlined',
+    path: '/flowManage',
+    routes: [
+      {
+        path: '/flowManage',
+        redirect: '/flowManage/add',
+      },
+      {
+        name: '新增流程',
+        icon: 'table',
+        path: '/flowManage/add',
+        component: './flowManage/add',
+      },
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
