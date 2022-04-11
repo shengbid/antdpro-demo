@@ -7,10 +7,12 @@ import ReactFlow, {
   Controls,
   Background,
   useReactFlow,
+  MarkerType,
 } from 'react-flow-renderer';
 
 import Sidebar from '../components/sidebar';
 import UpdateNode from '../components/nodeContent';
+import UpdateEdge from '../components/edgeContent';
 import CustomNode from '../components/customNode';
 // 示例效果
 // import { nodes as initialNodes, edges as initialEdges } from './data'
@@ -47,7 +49,8 @@ const SmoothTransition = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [nodeInfo, setNodeInfo] = useState<any>({});
-  // const [edgeInfo, setEdgeInfo] = useState<any>({})
+  const [edgeInfo, setEdgeInfo] = useState<any>({});
+  const [nodeShow, setNodeShow] = useState<boolean>(true);
 
   // 添加连接线
   const onConnect = useCallback(
@@ -55,7 +58,11 @@ const SmoothTransition = () => {
       setEdges((eds) => {
         console.log(params, eds);
         // params.animated = true
-        params.style = { stroke: '#f6ab6c' };
+        // params.style = { stroke: '#f6ab6c' };
+        params.label = '审批节点';
+        params.markerEnd = {
+          type: MarkerType.ArrowClosed,
+        };
         return addEdge(params, eds);
       }),
     [],
@@ -109,11 +116,14 @@ const SmoothTransition = () => {
   const onNodeClick = (e: any, node: any) => {
     // console.log(e, node)
     setNodeInfo(node.data);
+    setNodeShow(true);
   };
 
   // 点击节点连接线
   const onEdgeClick = (e: any, edge: any) => {
-    console.log(edge);
+    // console.log(edge); // edge拿不到完整的数据?
+    setEdgeInfo(edges.find((item) => edge.id === item.id));
+    setNodeShow(false);
   };
 
   // 改变节点内容
@@ -129,6 +139,21 @@ const SmoothTransition = () => {
       }),
     );
     // console.log(val, nodes)
+  };
+
+  // 改变连接线内容
+  const changeEdge = (val: any) => {
+    setEdges((nds) =>
+      nds.map((item) => {
+        if (item.id === val.id) {
+          item.label = val.label;
+          item.type = val.type;
+          item.style = { stroke: val.color };
+        }
+        return item;
+      }),
+    );
+    // console.log(val, edges)
   };
 
   const { setViewport } = useReactFlow();
@@ -153,7 +178,11 @@ const SmoothTransition = () => {
           onDragOver={onDragOver}
           fitView
         >
-          <UpdateNode info={nodeInfo} onChange={changeNode} />
+          {nodeShow ? (
+            <UpdateNode info={nodeInfo} onChange={changeNode} />
+          ) : (
+            <UpdateEdge info={edgeInfo} onChange={changeEdge} />
+          )}
           <Controls />
           <Background />
         </ReactFlow>
