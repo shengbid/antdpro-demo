@@ -15,7 +15,7 @@ import UpdateNode from '../components/nodeContent';
 import UpdateEdge from '../components/edgeContent';
 import CustomNode from '../components/customNode';
 // 示例效果
-// import { nodes as initialNodes, edges as initialEdges } from './data'
+import { nodes as listNodes, edges as listEdges } from './data';
 
 import './index.less';
 
@@ -23,7 +23,7 @@ const nodeTypes = {
   custom: CustomNode,
 };
 
-const initialNodes = [
+const oldNodes = [
   {
     id: '1',
     type: 'input',
@@ -33,6 +33,8 @@ const initialNodes = [
     position: { x: 200, y: 60 },
   },
 ];
+let initialNodes: any = [];
+let initialEdges: any = [];
 
 let id = 2;
 const getId = (add = false) => {
@@ -46,7 +48,7 @@ const getId = (add = false) => {
 const SmoothTransition = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [nodeInfo, setNodeInfo] = useState<any>({});
   const [edgeInfo, setEdgeInfo] = useState<any>({});
@@ -56,7 +58,7 @@ const SmoothTransition = () => {
   const onConnect = useCallback(
     (params) =>
       setEdges((eds) => {
-        console.log(params, eds);
+        // console.log(params, eds);
         // params.animated = true
         // params.style = { stroke: '#f6ab6c' };
         params.label = '审批节点';
@@ -157,7 +159,7 @@ const SmoothTransition = () => {
   };
 
   const { setViewport } = useReactFlow();
-  setViewport({ x: 0, y: 0, zoom: 2 });
+  setViewport({ x: 0, y: 0, zoom: 1.5 });
 
   return (
     <>
@@ -191,7 +193,15 @@ const SmoothTransition = () => {
   );
 };
 
-const AddFlow: React.FC = () => {
+const AddFlow: React.FC = (props: any) => {
+  const { query } = props.location;
+  if (query.id) {
+    initialNodes = listNodes;
+    initialEdges = listEdges;
+  } else {
+    initialNodes = oldNodes;
+    initialEdges = [];
+  }
   return (
     <div className="dndflow">
       <ReactFlowProvider>
