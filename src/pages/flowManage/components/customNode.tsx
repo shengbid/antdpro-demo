@@ -3,7 +3,7 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import { Handle } from 'react-flow-renderer';
 
-export default memo(({ data, isConnectable }: any) => {
+export default memo(({ data, id, isConnectable }: any) => {
   // console.log(1, data)
 
   return (
@@ -22,7 +22,7 @@ export default memo(({ data, isConnectable }: any) => {
           <CloseOutlined
             onClick={(e) => {
               e.stopPropagation();
-              data.onChange(data);
+              data.onChange(id);
             }}
             className="icon-close"
           />
