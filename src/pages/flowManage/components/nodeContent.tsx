@@ -11,6 +11,10 @@ export default ({ info, onChange }: nodeProps) => {
 
   useEffect(() => {
     if (info.id) {
+      // console.log(info)
+      if (!info.isHidden) {
+        info.isHidden = false;
+      }
       setNodeInfo(info);
     }
   }, [info.id]);
