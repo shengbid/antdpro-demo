@@ -73,9 +73,9 @@ const SmoothTransition = () => {
   }, []);
 
   // 删除节点
-  const onChange = (val: any) => {
-    // console.log(val)
-    setNodes((nds) => nds.filter((item) => item.id !== val.id));
+  const onChange = (nodeId: string) => {
+    // console.log(id)
+    setNodes((nds) => nds.filter((item) => item.id !== nodeId));
   };
 
   // 拖拽节点添加
@@ -99,11 +99,15 @@ const SmoothTransition = () => {
         id: getId(),
         type,
         position,
+        className: 'nodeStyle',
         data: { label: '', isHidden: false },
       };
       if (type === 'custom') {
         newNode.data.onChange = onChange;
         newNode.dragHandle = '.nodelabel';
+      }
+      if (type === 'output') {
+        newNode.data.label = '结束';
       }
 
       setNodes((nds) => nds.concat(newNode));

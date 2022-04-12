@@ -33,7 +33,7 @@ export default ({ info, onChange }: nodeProps) => {
 
   // 改变背景色
   const setNodeBg = (value: string) => {
-    console.log(value);
+    // console.log(value);
     setNodeInfo({
       ...nodeInfo,
       nodeBg: value,
