@@ -36,12 +36,9 @@ const oldNodes = [
 let initialNodes: any = [];
 let initialEdges: any = [];
 
-let id = 2;
-const getId = (add = false) => {
-  if (add) {
-    id += 1;
-    return `${id - 1}`;
-  }
+let id = 1;
+const getId = () => {
+  id += 1;
   return `${id}`;
 };
 
@@ -102,7 +99,7 @@ const SmoothTransition = () => {
         id: getId(),
         type,
         position,
-        data: { label: '', nodeBg: '#ffffff', isHidden: false, id: getId(true) },
+        data: { label: '', isHidden: false },
       };
       if (type === 'custom') {
         newNode.data.onChange = onChange;
@@ -116,8 +113,12 @@ const SmoothTransition = () => {
 
   // 点击节点
   const onNodeClick = (e: any, node: any) => {
-    // console.log(e, node)
-    setNodeInfo(node.data);
+    console.log(node);
+    setNodeInfo({
+      ...node.data,
+      id: node.id,
+      nodeBg: node.style && node.style.background ? node.style.background : '#ffffff',
+    });
     setNodeShow(true);
   };
 
@@ -135,7 +136,7 @@ const SmoothTransition = () => {
         if (item.id === val.id) {
           item.data = val;
           item.hidden = val.isHidden;
-          item.style = { backgroundColor: val.nodeBg };
+          item.style = { background: val.nodeBg };
         }
         return item;
       }),

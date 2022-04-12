@@ -20,6 +20,7 @@ export default ({ info, onChange }: edgeProps) => {
 
   useEffect(() => {
     if (info.id) {
+      // console.log(info)
       if (info.style) {
         info.color = info.style.stroke;
       }
@@ -79,7 +80,7 @@ export default ({ info, onChange }: edgeProps) => {
 
       <div className="updatenode__checkboxwrapper">
         <label>连接线类型:</label>
-        <Select defaultValue="default" onChange={changeEdgeType}>
+        <Select defaultValue="default" value={edgeInfo.type} onChange={changeEdgeType}>
           {edgeTypes.map((item) => (
             <Option value={item.value} key={item.value}>
               {item.label}
