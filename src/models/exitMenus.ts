@@ -1,16 +1,11 @@
 import { useState, useCallback } from 'react';
-
-export type menuItemProps = {
-  tab: string;
-  key: string;
-  pathname: string;
-};
+import type { menuTabProps } from '@/services/types';
 
 export default () => {
-  const [exitMenus, setExitMenus] = useState<menuItemProps[]>([]);
+  const [exitMenus, setExitMenus] = useState<menuTabProps[]>([]);
 
   // 改变缓存菜单
-  const updateMenus = useCallback((menus: menuItemProps[]) => {
+  const updateMenus = useCallback((menus: menuTabProps[]) => {
     setExitMenus(menus);
   }, []);
 
