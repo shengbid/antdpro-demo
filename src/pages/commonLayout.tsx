@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { history, useModel } from 'umi';
 import { find } from 'lodash';
@@ -11,6 +11,7 @@ export type menuItemProps = {
 
 const CommonLayout: React.FC = (props: any) => {
   const { location } = props;
+  const [activeKey, setActiveKey] = useState<string>('');
   const { exitMenus, updateMenus } = useModel('exitMenus', (model) => ({
     exitMenus: model.exitMenus,
     updateMenus: model.updateMenus,
@@ -22,6 +23,7 @@ const CommonLayout: React.FC = (props: any) => {
       (item: menuItemProps) => item.pathname !== location.pathname,
     );
     if (arr.length === exitMenus.length) {
+      setActiveKey(location.key);
       arr.push({
         tab: location.key,
         key: location.key,
@@ -40,9 +42,16 @@ const CommonLayout: React.FC = (props: any) => {
     <PageContainer
       tabList={exitMenus}
       onTabChange={onTabChange}
+      header={{
+        title: null,
+      }}
       tabProps={{
         type: 'editable-card',
         hideAdd: true,
+        activeKey,
+        tabBarStyle: {
+          paddingBottom: '3px',
+        },
         onEdit: (e, action) => {
           console.log(e, action);
           const arr: menuItemProps[] = exitMenus.filter(
