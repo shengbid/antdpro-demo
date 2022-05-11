@@ -56,6 +56,7 @@
         name: '全局数据流',
         icon: 'profile',
         path: '/data',
+        access: 'user',
         routes: [
           {
             name: 'dva数据',
