@@ -1,12 +1,23 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
+import type { MenuDataItem } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { getAuthRoutes } from './services/ant-design-pro/menu';
+import {
+  BookOutlined,
+  LinkOutlined,
+  SmileOutlined,
+  BarsOutlined,
+  RetweetOutlined,
+  ProfileOutlined,
+  TableOutlined,
+  FormOutlined,
+} from '@ant-design/icons';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -22,6 +33,7 @@ export const initialStateConfig = {
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
+  routes?: MenuDataItem[];
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
@@ -36,9 +48,11 @@ export async function getInitialState(): Promise<{
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
+    const { data } = await getAuthRoutes();
     return {
       fetchUserInfo,
       currentUser,
+      routes: data,
       settings: {},
     };
   }
@@ -100,6 +114,23 @@ export const request: RequestConfig = {
   },
 };
 
+// icon图标集合
+const IconMap = {
+  smile: <SmileOutlined />,
+  profile: <ProfileOutlined />,
+  table: <TableOutlined />,
+  BarsOutlined: <BarsOutlined />,
+  form: <FormOutlined />,
+  RetweetOutlined: <RetweetOutlined />,
+};
+// 映射菜单对应的图标
+const loopMenuItem = (menus: MenuDataItem[]): MenuDataItem[] =>
+  menus.map(({ icon, routes, ...item }) => ({
+    ...item,
+    icon: icon && IconMap[icon as string],
+    routes: routes && loopMenuItem(routes),
+  }));
+
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
@@ -115,6 +146,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);
       }
+    },
+    // postMenuData: () => loopMenuItem(initialState?.routes || []),
+    menu: {
+      locale: false,
+      request: async () => {
+        const { data } = await getAuthRoutes();
+        return loopMenuItem(data);
+      },
     },
     links: isDev
       ? [
