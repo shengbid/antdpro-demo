@@ -20,12 +20,12 @@ const getAuthRoutes = (req: Request, res: Response) => {
       path: '/data',
       access: 'user',
       routes: [
-        // {
-        //   name: 'dva数据',
-        //   icon: 'table',
-        //   path: '/data/dva',
-        //   component: './dataManage/project',
-        // },
+        {
+          name: 'dva数据',
+          icon: 'table',
+          path: '/data/dva',
+          component: './dataManage/project',
+        },
         {
           name: 'initial数据',
           icon: 'table',
