@@ -3,8 +3,8 @@
 <div align="center">
 
   <p>5.0版本</p>
-![menu.png](https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png)
-  <!-- <img src="./public/images/menu.png" width="500" height="300" /> -->
+<!-- ![menu.png](https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png) -->
+  <img src="https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png" width="500" height="300" />
 
 </div>
 
