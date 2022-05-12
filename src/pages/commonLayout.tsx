@@ -17,9 +17,11 @@ const CommonLayout: React.FC = (props: any) => {
   }));
 
   const flatMenus = handleMenusToFlat(route.routes);
+  const noCachRoutes = ['/', '/user/login']; // 不需要缓存的路由
 
   useEffect(() => {
     // console.log(333, location, flatMenus);
+    if (noCachRoutes.includes(pathname)) return;
     const arr: menuTabProps[] = exitMenus.filter((item: menuTabProps) => item.key !== pathname);
     if (arr.length === exitMenus.length) {
       const activeTab = find(flatMenus, (item) => item.pathname === pathname) || {};
@@ -43,7 +45,7 @@ const CommonLayout: React.FC = (props: any) => {
   const onTabChange = (key: string) => {
     history.push(key);
     setActiveKey(key);
-    console.log(key);
+    // console.log(key);
   };
   return (
     <PageContainer
@@ -60,7 +62,7 @@ const CommonLayout: React.FC = (props: any) => {
           paddingBottom: '3px',
         },
         onEdit: (path: string) => {
-          console.log(path, exitMenus, pathname);
+          // console.log(path, exitMenus, pathname);
           let activePath = pathname;
           const arr: menuTabProps[] = exitMenus.filter((item: menuTabProps, i: number) => {
             if (item.key === path) {
