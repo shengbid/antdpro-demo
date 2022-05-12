@@ -4,11 +4,13 @@ import { history, useModel } from 'umi';
 import { find } from 'lodash';
 import type { menuTabProps } from '@/services/types';
 import { handleMenusToFlat } from '@/utils/base';
+import { KeepAlive, useAliveController } from 'react-activation';
 
 const CommonLayout: React.FC = (props: any) => {
   const { location, route } = props;
   const { pathname } = location;
   const [activeKey, setActiveKey] = useState<string>('');
+  const { dropScope } = useAliveController();
   const { exitMenus, updateMenus } = useModel('exitMenus', (model) => ({
     exitMenus: model.exitMenus,
     updateMenus: model.updateMenus,
@@ -57,11 +59,11 @@ const CommonLayout: React.FC = (props: any) => {
         tabBarStyle: {
           paddingBottom: '3px',
         },
-        onEdit: (path) => {
-          // console.log(path, action, pathname);
+        onEdit: (path: string) => {
+          console.log(path, exitMenus, pathname);
           let activePath = pathname;
           const arr: menuTabProps[] = exitMenus.filter((item: menuTabProps, i: number) => {
-            if (item.key === pathname) {
+            if (item.key === path) {
               // 获取前一个标签
               activePath = exitMenus[i - 1].key;
             }
@@ -71,11 +73,15 @@ const CommonLayout: React.FC = (props: any) => {
           if (path === pathname) {
             history.push(activePath);
           }
+          // 关闭页签去掉缓存
+          dropScope(path);
           updateMenus(arr);
         },
       }}
     >
-      {props.children}
+      <KeepAlive when={true} id={pathname} name={pathname} saveScrollPosition="screen">
+        {props.children}
+      </KeepAlive>
     </PageContainer>
   );
 };
