@@ -1,15 +1,12 @@
-
-
 <h1 align="center">Ant Design Pro项目常用组件封装</h1>
 
 <div align="center">
 
   <p>5.0版本</p>
-  ![](public/images/menu.png)
-  <img src="./public/images/menu.png" width="500" height="300" />
+![menu.png](https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png)
+  <!-- <img src="./public/images/menu.png" width="500" height="300" /> -->
 
 </div>
-
 
 ## 官网地址:
 
@@ -56,4 +53,4 @@ $ 启动项目 yarn start  # visit http://localhost:8000
 
 ```
 
-### 所有功能博客有详细介绍  https://www.cnblogs.com/steamed-twisted-roll/category/1779612.html
+### 所有功能博客有详细介绍 https://www.cnblogs.com/steamed-twisted-roll/category/1779612.html
