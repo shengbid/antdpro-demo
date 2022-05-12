@@ -4,7 +4,7 @@
 
   <p>5.0版本</p>
 <!-- ![menu.png](https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png) -->
-  <img src="https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png" width="500" height="300" />
+  <img src="https://s2.loli.net/2022/05/12/4oZ6pBJRfeF9YrW.png"  />
 
 </div>
 
