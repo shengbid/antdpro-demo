@@ -16,6 +16,7 @@ export type comuploadProps = {
   onChange?: (arr?: any) => void;
   limit?: number;
   isDetail?: boolean;
+  multiple?: boolean;
 };
 
 const ComUpload: React.FC<comuploadProps> = ({
@@ -23,6 +24,7 @@ const ComUpload: React.FC<comuploadProps> = ({
   limit = 10,
   onChange,
   isDetail = false,
+  multiple = true,
 }) => {
   const [files, setFiles] = useState<any[]>([]);
   // console.log(3, value)
@@ -60,18 +62,29 @@ const ComUpload: React.FC<comuploadProps> = ({
   const changeFile = ({ file, fileList }: any) => {
     console.log(6, file, fileList);
     if (file.status !== 'uploading') {
-      // 需要改变fileList的值,否则status的状态不会改变
-      fileList = fileList.map((item: any) => {
-        let newItem = { ...item };
-        if (item.response) {
-          newItem = {
-            fileName: item.name,
-            fileUrl: item.response.data.fileUrl,
-          };
+      // 多文件上传,所有文件上传完成后改变值
+      let isFinish = true;
+      fileList.some((item: any) => {
+        if (item.status && item.status !== 'done') {
+          isFinish = false;
         }
-        return newItem;
       });
-      onChange?.(fileList);
+      if (isFinish) {
+        if (fileList.length >= files.length) {
+          // 需要改变fileList的值,否则status的状态不会改变
+          fileList = fileList.map((item: any) => {
+            let newItem = { ...item };
+            if (item.response) {
+              newItem = {
+                fileName: item.name,
+                fileUrl: item.response.data.fileUrl,
+              };
+            }
+            return newItem;
+          });
+        }
+        onChange?.(fileList);
+      }
     }
     setFiles(fileList);
   };
@@ -109,6 +122,7 @@ const ComUpload: React.FC<comuploadProps> = ({
     <Upload
       action={action}
       disabled={isDetail}
+      multiple={multiple}
       iconRender={iconRender}
       maxCount={limit}
       onChange={changeFile}
