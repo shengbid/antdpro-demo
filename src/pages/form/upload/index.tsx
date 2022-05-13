@@ -37,6 +37,17 @@ const UploadDemo: React.FC = () => {
     },
   ];
 
+  const testUrl = [
+    {
+      fileName: '测试文件1',
+      fileUrl: 'http://dummyimage.com/400x300/f2cd79/FFF&text=qassj',
+    },
+    {
+      fileName: '测试文件2',
+      fileUrl: 'http://dummyimage.com/400x300/f2cd79/FFF&text=qassj',
+    },
+  ];
+
   const onFinish = async (values: any) => {
     console.log(values);
   };
@@ -48,16 +59,8 @@ const UploadDemo: React.FC = () => {
           form={form}
           onFinish={onFinish}
           initialValues={{
-            attrList: [
-              {
-                fileName: '测试文件1',
-                fileUrl: 'http://dummyimage.com/400x300/f2cd79/FFF&text=qassj',
-              },
-              {
-                fileName: '测试文件2',
-                fileUrl: 'http://dummyimage.com/400x300/f2cd79/FFF&text=qassj',
-              },
-            ],
+            attrList: testUrl,
+            imgList: testUrl,
           }}
         >
           <Form.Item name="name" label="名称" rules={[{ required: true }]}>
