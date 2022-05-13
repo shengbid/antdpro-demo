@@ -7,6 +7,7 @@ export type comuploadProps = {
   onChange?: (arr?: any) => void;
   limit?: number;
   isDetail?: boolean;
+  multiple?: boolean;
 };
 
 const ImageUpload: React.FC<comuploadProps> = ({
@@ -14,18 +15,20 @@ const ImageUpload: React.FC<comuploadProps> = ({
   limit = 10,
   onChange,
   isDetail = false,
+  multiple = true,
 }) => {
   const [files, setFiles] = useState<any[]>([]);
   const [previewVisible, setPreviewVisible] = useState<boolean>(false);
   const [previewTitle, setPreviewTitle] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string>('');
+  const [originFiles, setOriginFiles] = useState<any>([]);
 
   // 获取上传图片的base64地址
-  const getBase64 = (file: any) => {
+  const getBase64 = (file: any, uid: string) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
+      reader.onload = () => resolve({ uid, url: reader.result });
       reader.onerror = (error) => reject(error);
     });
   };
@@ -41,7 +44,7 @@ const ImageUpload: React.FC<comuploadProps> = ({
           if (!item.url) {
             newItem.name = item.fileName;
             newItem.url = item.fileUrl;
-            newItem.uid = item.id ? item.id : Math.floor(Math.random() * 1000);
+            newItem.uid = item.uid ? item.uid : Math.floor(Math.random() * 1000);
           }
           newValues.push(newItem);
         });
@@ -50,7 +53,7 @@ const ImageUpload: React.FC<comuploadProps> = ({
         newValues.push({
           name: value.fileName,
           url: value.url ? value.url : value.fileUrl,
-          uid: value.id ? value.id : Math.floor(Math.random() * 1000),
+          uid: value.uid ? value.uid : Math.floor(Math.random() * 1000),
         });
       }
       // console.log(1, value);
@@ -62,8 +65,8 @@ const ImageUpload: React.FC<comuploadProps> = ({
 
   // 文件上传
   const changeFile = async ({ file, fileList }: any) => {
-    console.log(6, file, fileList);
     if (file.status !== 'uploading') {
+      console.log(6, file, fileList, files);
       // 上传错误处理
       // if (file.response && file.response.responseCode === 'B00001') {
       //   loginOut()
@@ -80,25 +83,40 @@ const ImageUpload: React.FC<comuploadProps> = ({
       //   })
       //   return
       // }
-      // 新增才处理,删除不处理
-      if (fileList.length > files.length) {
-        const url = await getBase64(file.originFileObj);
-        // 需要改变fileList的值,否则status的状态不会改变
-        fileList = fileList.map((item: any) => {
-          let newItem = { ...item };
-          if (item.response) {
-            newItem = {
-              fileName: item.name,
-              fileUrl: item.response.data.fileUrl,
-            };
-            if (item.uid === file.uid) {
-              newItem.url = url;
-            }
-          }
-          return newItem;
-        });
+
+      // 多文件上传,等待最后一个文件上传后再改变值
+      let isFinish = true;
+      fileList.some((item: any) => {
+        if (item.status && item.status !== 'done') {
+          isFinish = false;
+        }
+      });
+      if (file.response) {
+        const arr = originFiles;
+        arr.push(getBase64(file.originFileObj, file.uid));
+        setOriginFiles(arr);
       }
-      onChange?.(fileList);
+
+      // 新增才处理,删除不处理
+      if (isFinish) {
+        if (fileList.length >= files.length) {
+          const datas = await Promise.all(originFiles);
+          console.log(2, datas);
+          // 需要改变fileList的值,否则status的状态不会改变
+          fileList = fileList.map((item: any) => {
+            let newItem = { ...item };
+            if (item.response) {
+              newItem = {
+                fileName: item.name,
+                fileUrl: item.response.data.fileUrl,
+                url: datas.find((ss) => ss.uid === item.uid)?.url,
+              };
+            }
+            return newItem;
+          });
+        }
+        onChange?.(fileList);
+      }
     }
     setFiles(fileList);
   };
@@ -133,6 +151,7 @@ const ImageUpload: React.FC<comuploadProps> = ({
         listType="picture-card"
         disabled={isDetail}
         maxCount={limit}
+        multiple={multiple}
         onChange={changeFile}
         fileList={files}
         accept="image/*"
