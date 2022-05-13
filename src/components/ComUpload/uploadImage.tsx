@@ -53,7 +53,7 @@ const ImageUpload: React.FC<comuploadProps> = ({
           uid: value.id ? value.id : Math.floor(Math.random() * 1000),
         });
       }
-      console.log(1, value);
+      // console.log(1, value);
       setFiles(newValues);
     }
   }, [value]);
@@ -64,21 +64,40 @@ const ImageUpload: React.FC<comuploadProps> = ({
   const changeFile = async ({ file, fileList }: any) => {
     console.log(6, file, fileList);
     if (file.status !== 'uploading') {
-      const url = await getBase64(file.originFileObj);
-      // 需要改变fileList的值,否则status的状态不会改变
-      fileList = fileList.map((item: any) => {
-        let newItem = { ...item };
-        if (item.response) {
-          newItem = {
-            fileName: item.name,
-            fileUrl: item.response.data.fileUrl,
-          };
-          if (item.uid === file.uid) {
-            newItem.url = url;
+      // 上传错误处理
+      // if (file.response && file.response.responseCode === 'B00001') {
+      //   loginOut()
+      //   notification.warning({
+      //     key: 'error',
+      //     message: file.response.responseMsg
+      //   })
+      //   return
+      // }
+      // if (file.response && file.response.responseCode !== '000000') {
+      //   notification.warning({
+      //     key: 'error',
+      //     message: file.response.responseMsg
+      //   })
+      //   return
+      // }
+      // 新增才处理,删除不处理
+      if (fileList.length > files.length) {
+        const url = await getBase64(file.originFileObj);
+        // 需要改变fileList的值,否则status的状态不会改变
+        fileList = fileList.map((item: any) => {
+          let newItem = { ...item };
+          if (item.response) {
+            newItem = {
+              fileName: item.name,
+              fileUrl: item.response.data.fileUrl,
+            };
+            if (item.uid === file.uid) {
+              newItem.url = url;
+            }
           }
-        }
-        return newItem;
-      });
+          return newItem;
+        });
+      }
       onChange?.(fileList);
     }
     setFiles(fileList);
@@ -116,6 +135,7 @@ const ImageUpload: React.FC<comuploadProps> = ({
         maxCount={limit}
         onChange={changeFile}
         fileList={files}
+        accept="image/*"
         onPreview={handlePreview}
         beforeUpload={checkFileSize}
       >
