@@ -11,13 +11,15 @@ import { getAuthRoutes } from './services/ant-design-pro/menu';
 import {
   BookOutlined,
   LinkOutlined,
-  SmileOutlined,
-  BarsOutlined,
-  RetweetOutlined,
-  ProfileOutlined,
-  TableOutlined,
-  FormOutlined,
+  // SmileOutlined,
+  // BarsOutlined,
+  // RetweetOutlined,
+  // ProfileOutlined,
+  // TableOutlined,
+  // FormOutlined,
 } from '@ant-design/icons';
+import Icon from '@ant-design/icons';
+import * as icons from '@ant-design/icons';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -115,19 +117,19 @@ export const request: RequestConfig = {
 };
 
 // icon图标集合
-const IconMap = {
-  smile: <SmileOutlined />,
-  profile: <ProfileOutlined />,
-  table: <TableOutlined />,
-  BarsOutlined: <BarsOutlined />,
-  form: <FormOutlined />,
-  RetweetOutlined: <RetweetOutlined />,
-};
+// const IconMap = {
+//   smile: <SmileOutlined />,
+//   profile: <ProfileOutlined />,
+//   table: <TableOutlined />,
+//   BarsOutlined: <BarsOutlined />,
+//   form: <FormOutlined />,
+//   RetweetOutlined: <RetweetOutlined />,
+// };
 // 映射菜单对应的图标
 const loopMenuItem = (menus: MenuDataItem[]): MenuDataItem[] =>
   menus.map(({ icon, routes, ...item }) => ({
     ...item,
-    icon: icon && IconMap[icon as string],
+    icon: icon && <Icon component={icons[icon]} />,
     routes: routes && loopMenuItem(routes),
   }));
 

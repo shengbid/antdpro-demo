@@ -11,12 +11,12 @@ const getAuthRoutes = (req: Request, res: Response) => {
     {
       path: '/welcome',
       name: 'welcome',
-      icon: 'smile',
+      icon: 'SmileOutlined',
       component: './Welcome',
     },
     {
       name: '全局数据流',
-      icon: 'profile',
+      icon: 'ProfileOutlined',
       path: '/data',
       access: 'user',
       routes: [
@@ -43,7 +43,7 @@ const getAuthRoutes = (req: Request, res: Response) => {
     {
       path: '/table',
       name: 'table',
-      icon: 'table',
+      icon: 'TableOutlined',
       routes: [
         {
           name: 'protable表格',
@@ -143,7 +143,7 @@ const getAuthRoutes = (req: Request, res: Response) => {
     },
     {
       name: 'Form表单',
-      icon: 'form',
+      icon: 'FormOutlined',
       path: '/form',
       routes: [
         {
