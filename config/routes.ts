@@ -56,12 +56,12 @@
         name: '全局数据流',
         icon: 'profile',
         path: '/data',
-        access: 'user',
         routes: [
           {
             name: 'dva数据',
             icon: 'table',
             path: '/data/dva',
+            // access: 'user',
             component: './dataManage/project',
           },
           {
@@ -238,6 +238,9 @@
             component: './flowManage/list',
           },
         ],
+      },
+      {
+        component: './404',
       },
     ],
   },
