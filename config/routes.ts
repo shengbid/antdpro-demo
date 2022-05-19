@@ -240,6 +240,36 @@
         ],
       },
       {
+        name: 'echarts图表',
+        icon: 'PicLeftOutlined',
+        path: '/echarts',
+        routes: [
+          {
+            name: '地图',
+            icon: 'DotChartOutlined',
+            path: '/echarts/map',
+            routes: [
+              {
+                path: '/echarts/map',
+                redirect: '/echarts/map/region',
+              },
+              {
+                name: '行政区域地图',
+                icon: 'table',
+                path: '/echarts/map/region',
+                component: './echarts/map/region',
+              },
+              {
+                name: '涟漪地图',
+                icon: 'table',
+                path: '/echarts/map/effectScatter',
+                component: './echarts/map/effectScatter',
+              },
+            ],
+          },
+        ],
+      },
+      {
         component: './404',
       },
     ],
